@@ -14,7 +14,8 @@ function App() {
       <Person name="Olatz" surname="BBBB" age={27} />
 
       <PersonClass name="Carlos" surname="Sánchez" age={40} />
-      
+      <PersonClass name="Ernaldo" surname="Carro" age={20} />
+      <PersonClass name="Pepe" surname="Viyuela" age={89} />
 
     </>
   )
