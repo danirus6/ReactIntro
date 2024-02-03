@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Counter from './components/Counter';
+import Greeting from './components/Greeting';
+import Header from './components/Header';
+import Home from './components/Home';
 
 function App() {
   const platillos = [
@@ -27,8 +28,10 @@ function App() {
 
   return (
     <div>
-    <Header />
-    <Home platillos={platillos} />
+      <Header />
+      <Home platillos={platillos} />
+      <Counter initialCount={0} multiplier={2} />
+      <Greeting name={"Aurelio"} />
     </div>
   )
 }
