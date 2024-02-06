@@ -14,9 +14,10 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (contact.name.length >= 3) { // Validación de nombre con mínimo de caracteres
+        if (contact.name.length >= 3) {
             localStorage.setItem('contact', JSON.stringify(contact));
-            navigate('/'); // Redirecciona a la vista principal
+            console.log(localStorage)
+            navigate('/');
         } else {
             alert('El nombre debe tener al menos 3 caracteres.');
         }

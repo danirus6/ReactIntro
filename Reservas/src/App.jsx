@@ -1,24 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './Home';
-import Reserve from './Reserve'; 
-import Footer from './Footer'; 
+import Home from './components/Home';
+import Reserve from './components/Reserve'; 
+import Footer from './components/Footer'; 
 
 const App = () => {
   return (
     <Router>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/reserve">Reserve</Link></li>
-        </ul>
-      </nav>
+      
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/reserve" element={<Reserve />} />
       </Routes>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/reserve">Reserve</Link></li>
 
+        </ul>
+      </nav>
       <Footer />
     </Router>
   );

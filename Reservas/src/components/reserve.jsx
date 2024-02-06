@@ -17,6 +17,7 @@ const Reserve = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         localStorage.setItem('reservation', JSON.stringify(reservation));
+        console.log(localStorage);
         navigate('/');
     };
 
