@@ -11,12 +11,12 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/reserve" element={<Reserve />} />
+        <Route path="/Reserve" element={<Reserve />} />
       </Routes>
       <nav>
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/reserve">Reserve</Link></li>
+          <li><Link to="/Reserve">Reserve</Link></li>
 
         </ul>
       </nav>
