@@ -1,8 +1,14 @@
 import React from 'react'
 
-const ListNews = () => {
+const ListNews = (props) => {
   return (
-    <div>ListNews</div>
+    <>
+        <p>{props.results.title}</p>
+        <img
+            src={props.results.media.media-metadata.url}
+            alt={props.results.media.caption}
+        />
+    </>
   )
 }
 
