@@ -3,7 +3,7 @@ import axios from 'axios';
 import news from './AppReducer'
 
 const initialState = {
-  news:  [],
+  news: [],
 };
 
 export const GlobalContext = createContext(initialState);

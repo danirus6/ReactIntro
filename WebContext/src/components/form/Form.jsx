@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState'; 
 
 const Form = () => {
-    console.log("HOLA")
     const [data, setData] = useState({
         title: '',
     });

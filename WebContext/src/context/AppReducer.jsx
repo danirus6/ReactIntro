@@ -7,6 +7,7 @@ const newsReducer = (state, action) => {
 		};
 	  case 'ADD_NEWS':
 		const updatedNews = [action.payload];
+		
 		localStorage.setItem('News', JSON.stringify(updatedNews));
 		return {
 		  ...state,
