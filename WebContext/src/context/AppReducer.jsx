@@ -1,5 +1,11 @@
 const news = (state, action) => {
+	
 	switch (action.type) {
+		case 'LOAD_SAVED_NEWS':
+    		return {
+      			...state,
+      			news: [...action.payload, ...state.news],
+    		};
 		case 'GET_NEWS':
 			return {
 				...state,

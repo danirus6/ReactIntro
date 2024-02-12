@@ -1,5 +1,4 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import AppReducer from './AppReducer';
 import axios from 'axios';
 
 const initialState = {
@@ -8,15 +7,37 @@ const initialState = {
 
 export const GlobalContext = createContext(initialState);
 
-export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+const appReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOAD_SAVED_NEWS':
+      return {
+        ...state,
+        news: [...action.payload, ...state.news],
+      };
+    case 'GET_NEWS':
+      const newsFromAPI = action.payload.filter(apiNews => !state.news.some(news => news.id === apiNews.id));
+      return {
+        ...state,
+        news: [...state.news, ...newsFromAPI],
+      };
+    case 'ADD_NEWS':
+      const updatedNews = [action.payload, ...state.news];
+      localStorage.setItem('News', JSON.stringify(updatedNews));
+      return {
+        ...state,
+        news: updatedNews,
+      };
+    default:
+      return state;
+  }
+};
 
-  // Cargar noticias de la API del New York Times
+export const GlobalProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(appReducer, initialState);
+
   const getNews = async () => {
     try {
-      const response = await axios.get(
-        'https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=Wd9fRmTqg5FxbSYpKaKPLZLk954zsReI'
-      );
+      const response = await axios.get('https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=Wd9fRmTqg5FxbSYpKaKPLZLk954zsReI');
       dispatch({
         type: 'GET_NEWS',
         payload: response.data.results,
@@ -27,8 +48,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const addNews = (newArticle) => {
-      const newsWithId = { ...newArticle, id: Date.now() }; 
-
+    const newsWithId = { ...newArticle, id: Date.now() };
     dispatch({
       type: 'ADD_NEWS',
       payload: newsWithId,
@@ -37,15 +57,13 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      const News = JSON.parse(localStorage.getItem('News')) || [];
-    
-      News.forEach(newsItem => {
-        
+      const storedNews = JSON.parse(localStorage.getItem('News')) || [];
+      if (storedNews.length > 0) {
         dispatch({
-          type: 'ADD_NEWS',
-          payload: newsItem,
+          type: 'LOAD_SAVED_NEWS',
+          payload: storedNews,
         });
-      });
+      }
       await getNews();
     };
 
@@ -57,7 +75,7 @@ export const GlobalProvider = ({ children }) => {
       value={{
         news: state.news,
         getNews,
-        addNews
+        addNews,
       }}
     >
       {children}

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState'; 
 
 const Form = () => {
-    console.log("HOLA")
     const [data, setData] = useState({
         title: '',
     });
@@ -22,8 +21,8 @@ const Form = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`Sending data… ${data.title}`);
-        addNews({ data }); 
-        clearForm();
+        addNews({ title: data.title  }); 
+        // clearForm();
 
         setTimeout(() => {
             navigate('/News');
