@@ -1,39 +1,14 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
-
+import news from './AppReducer'
 const initialState = {
-  news: [],
+  news: JSON.parse(localStorage.getItem('News')) || [],
 };
 
 export const GlobalContext = createContext(initialState);
 
-const appReducer = (state, action) => {
-  switch (action.type) {
-    case 'LOAD_SAVED_NEWS':
-      return {
-        ...state,
-        news: [...action.payload, ...state.news],
-      };
-    case 'GET_NEWS':
-      const newsFromAPI = action.payload.filter(apiNews => !state.news.some(news => news.id === apiNews.id));
-      return {
-        ...state,
-        news: [...state.news, ...newsFromAPI],
-      };
-    case 'ADD_NEWS':
-      const updatedNews = [action.payload, ...state.news];
-      localStorage.setItem('News', JSON.stringify(updatedNews));
-      return {
-        ...state,
-        news: updatedNews,
-      };
-    default:
-      return state;
-  }
-};
-
 export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(appReducer, initialState);
+  const [state, dispatch] = useReducer(news, initialState);
 
   const getNews = async () => {
     try {
@@ -48,7 +23,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const addNews = (newArticle) => {
-    const newsWithId = { ...newArticle, id: Date.now() };
+    const newsWithId = { ...newArticle, id: Date.now() }; 
     dispatch({
       type: 'ADD_NEWS',
       payload: newsWithId,
@@ -56,28 +31,15 @@ export const GlobalProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const loadInitialData = async () => {
-      const storedNews = JSON.parse(localStorage.getItem('News')) || [];
-      if (storedNews.length > 0) {
-        dispatch({
-          type: 'LOAD_SAVED_NEWS',
-          payload: storedNews,
-        });
-      }
-      await getNews();
-    };
-
-    loadInitialData();
+    getNews(); 
   }, []);
 
   return (
-    <GlobalContext.Provider
-      value={{
-        news: state.news,
-        getNews,
-        addNews,
-      }}
-    >
+    <GlobalContext.Provider value={{ 
+      news: state.news,
+      getNews,
+      addNews
+      }}>
       {children}
     </GlobalContext.Provider>
   );
