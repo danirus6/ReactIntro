@@ -8,14 +8,13 @@ const News = () => {
     getNews();
   }, []);
 
-  const noticia = news.map((noticia) => {
+  const noticias = news.map((noticia, index) => {
       return (
-        <div key={noticia.id}>
+        <div key={index}>
           <h1>{noticia.title}</h1>
         </div>
       );
   });
-  return <div>{noticia}</div>;
+  return <div>{noticias}</div>;
 };
-
 export default News;

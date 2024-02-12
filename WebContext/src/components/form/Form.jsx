@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState'; 
 
 const Form = () => {
+    console.log("HOLA")
     const [data, setData] = useState({
         title: '',
     });
@@ -22,11 +23,11 @@ const Form = () => {
         event.preventDefault();
         console.log(`Sending data… ${data.title}`);
         addNews({ title: data.title  }); 
-        // clearForm();
+        clearForm();
 
         setTimeout(() => {
             navigate('/News');
-        }, 1000);
+        }, 3000);
     };
 
     const handleInputChange = (event) => {
@@ -45,7 +46,6 @@ const Form = () => {
             setBtnDisabled(false);
         }
     };
-
     return (
         <>
             <form onSubmit={handleSubmit}>

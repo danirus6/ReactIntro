@@ -7,8 +7,10 @@ const Home = () => {
     <div className="home-container">
       <h1>Bienvenido a Mi Página de Noticias</h1>
         <div className="links">
+        <nav>
         <Link to="/news" className="home-link">Ver Noticias</Link>
         <Link to="/form" className="home-link">Crear Noticia</Link>
+        </nav>
       </div>
     </div>
   );

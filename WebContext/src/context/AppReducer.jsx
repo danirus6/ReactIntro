@@ -6,7 +6,7 @@ const newsReducer = (state, action) => {
 		  news: [...state.news, ...action.payload],
 		};
 	  case 'ADD_NEWS':
-		const updatedNews = [action.payload, ...state.news];
+		const updatedNews = [action.payload];
 		localStorage.setItem('News', JSON.stringify(updatedNews));
 		return {
 		  ...state,
@@ -18,4 +18,3 @@ const newsReducer = (state, action) => {
   };
   
   export default newsReducer;
-  

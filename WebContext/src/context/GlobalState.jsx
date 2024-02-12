@@ -1,8 +1,9 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
 import news from './AppReducer'
+
 const initialState = {
-  news: JSON.parse(localStorage.getItem('News')) || [],
+  news:  [],
 };
 
 export const GlobalContext = createContext(initialState);
@@ -23,17 +24,13 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const addNews = (newArticle) => {
-    const newsWithId = { ...newArticle, id: Date.now() }; 
+    // const newsWithId = {...newArticle , id: Date.now() }; 
     dispatch({
       type: 'ADD_NEWS',
-      payload: newsWithId,
+      payload: {...newArticle},
     });
   };
-
-  useEffect(() => {
-    getNews(); 
-  }, []);
-
+  
   return (
     <GlobalContext.Provider value={{ 
       news: state.news,
