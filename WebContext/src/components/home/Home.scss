@@ -1,0 +1,40 @@
+// src/components/Home.scss
+
+.home-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  p {
+    color: #666;
+    margin: 20px auto;
+    font-size: 1.2rem;
+    max-width: 600px;
+  }
+   
+
+  .links {
+    margin-top: 30px;
+  }
+  
+  .home-link {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
